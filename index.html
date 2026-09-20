@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>【見本】毎月の手作業を30分で見える化｜業務ラクラク診断（無料）</title>
+<meta name="description" content="LP制作の見本です。中小企業向けの無料診断サービスを想定した、広告運用・計測タグ設置を前提としたランディングページ。">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0f2a43">
+
+<!-- ① 計測の準備：dataLayer を先に用意（GTMより前に置く） -->
+<script>window.dataLayer = window.dataLayer || [];</script>
+<!-- ② Google Tag Manager（head用）: 本番ではここにGTMのスニペットを貼る。Google広告・Meta広告のタグはGTM側で管理する
+<script>(function(w,d,s,l,i){...})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+-->
+
+<style>
+:root{
+  --navy:#0f2a43; --ink:#12263f; --bg:#fbfaf7; --card:#ffffff; --line:#e3ded3;
+  --accent:#c2410c; --accent-dark:#9a3412; --teal:#0b7285; --teal-soft:#e3f4f6; --muted:#5b6b7d;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);background:var(--bg);line-height:1.8;font-size:16px;
+  font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;
+  padding-bottom:76px}
+img,svg{max-width:100%;height:auto}
+a{color:inherit}
+.wrap{width:min(1040px,100% - 32px);margin-inline:auto}
+h1,h2,h3{line-height:1.4;margin:0}
+h2{font-size:clamp(22px,4.6vw,32px);text-align:center;margin-bottom:12px}
+.lead{text-align:center;color:var(--muted);margin:0 auto 32px;max-width:36em}
+section{padding:56px 0}
+.sample-bar{background:#fff4e5;color:#7a3e00;font-size:13px;text-align:center;padding:8px 16px;border-bottom:1px solid #f0d9b5}
+
+/* header */
+.site-header{background:#fff;border-bottom:1px solid var(--line)}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;min-height:56px}
+.logo{font-weight:700;letter-spacing:.02em}
+.logo span{color:var(--teal)}
+.header-cta{font-size:14px;font-weight:700;text-decoration:none;color:var(--accent-dark);border:2px solid var(--accent);border-radius:999px;padding:6px 16px}
+
+/* button */
+.btn{display:inline-block;background:var(--accent);color:#fff;font-weight:700;font-size:18px;text-decoration:none;text-align:center;
+  padding:16px 32px;border-radius:999px;border:0;cursor:pointer;box-shadow:0 4px 0 var(--accent-dark);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(2px);box-shadow:0 2px 0 var(--accent-dark)}
+.btn:focus-visible,.header-cta:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #ffb703;outline-offset:3px}
+.btn-note{display:block;font-size:13px;font-weight:400;opacity:.92}
+
+/* hero */
+.hero{background:var(--navy);color:#fff;padding:48px 0 56px}
+.hero .wrap{display:grid;gap:32px}
+.hero h1{font-size:clamp(26px,6.2vw,42px)}
+.hero h1 em{font-style:normal;color:#ffd59e}
+.hero p{margin:16px 0 24px;color:#d6e2ee}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px;padding:0;list-style:none}
+.pills li{background:rgba(255,255,255,.12);border-radius:999px;padding:4px 14px;font-size:14px}
+.compare{background:var(--card);color:var(--ink);border-radius:var(--radius);padding:20px}
+.compare h3{font-size:15px;color:var(--muted);margin-bottom:12px}
+.compare .row{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:stretch}
+.compare .box{border-radius:10px;padding:12px;font-size:14px}
+.compare .before{background:#f4f1ea}
+.compare .after{background:var(--teal-soft)}
+.compare .big{display:block;font-size:clamp(20px,5.6vw,26px);font-weight:700;line-height:1.3;white-space:nowrap}
+.compare .arrow{align-self:center;font-size:24px;color:var(--accent)}
+.compare small{display:block;margin-top:10px;color:var(--muted);font-size:12px}
+
+/* cards */
+.grid{display:grid;gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+.card .no{display:inline-block;font-weight:700;color:var(--teal);font-size:14px;letter-spacing:.08em;margin-bottom:6px}
+.card h3{font-size:19px;margin-bottom:8px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.alt{background:#f3efe6}
+
+/* flow */
+.steps{counter-reset:step;display:grid;gap:16px;padding:0;list-style:none}
+.steps li{counter-increment:step;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 20px 20px 72px;position:relative}
+.steps li::before{content:counter(step);position:absolute;left:20px;top:18px;width:36px;height:36px;border-radius:50%;background:var(--teal);color:#fff;font-weight:700;display:grid;place-items:center}
+.steps b{display:block;font-size:17px}
+.steps span{color:var(--muted);font-size:15px}
+
+/* checklist */
+.check{list-style:none;padding:0;margin:0 0 24px;display:grid;gap:10px}
+.check li{padding-left:32px;position:relative}
+.check li::before{content:"";position:absolute;left:4px;top:.55em;width:14px;height:8px;border-left:3px solid var(--teal);border-bottom:3px solid var(--teal);transform:rotate(-45deg)}
+.center{text-align:center}
+.plan-box{max-width:640px;margin:0 auto}
+
+/* voices */
+.voice{font-size:15px}
+.voice b{display:block;margin-top:8px;font-size:13px;color:var(--muted);font-weight:400}
+.tag{display:inline-block;background:#fff4e5;color:#7a3e00;border-radius:4px;font-size:11px;padding:0 6px;margin-left:6px}
+
+/* faq */
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700;padding:16px 20px;list-style:none;position:relative;padding-right:48px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--teal)}
+details[open] summary::after{content:"−"}
+details p{margin:0;padding:0 20px 16px;color:var(--muted);font-size:15px}
+
+/* form */
+.form-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;max-width:560px;margin:0 auto}
+label{display:block;font-weight:700;font-size:15px;margin-bottom:14px}
+label small{font-weight:400;color:var(--muted)}
+input,select{display:block;width:100%;margin-top:6px;padding:12px 14px;font:inherit;border:1px solid #b8b2a5;border-radius:10px;background:#fff;color:var(--ink)}
+.form-card .btn{width:100%;margin-top:6px}
+.thanks{background:var(--teal-soft);border-radius:var(--radius);padding:24px;text-align:center;max-width:560px;margin:0 auto}
+.privacy{font-size:12px;color:var(--muted);margin:12px 0 0;text-align:center}
+
+/* notes */
+.notes{background:var(--navy);color:#e6eef6;padding:48px 0}
+.notes h2{color:#fff}
+.notes .lead{color:#b9cadb}
+.notes ul{padding-left:1.2em;margin:0 0 20px}
+.notes li{margin-bottom:6px}
+.notes code,.log{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px}
+.log{background:#081a2b;border-radius:10px;padding:12px 14px;min-height:96px;max-height:180px;overflow:auto;white-space:pre-wrap;margin:0;color:#9ee493}
+
+footer{padding:24px 0 8px;text-align:center;font-size:12px;color:var(--muted)}
+
+/* sticky CTA (mobile) */
+.sticky{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.97);border-top:1px solid var(--line);padding:10px 16px;z-index:10}
+.sticky .btn{width:100%;padding:12px 16px;font-size:17px}
+
+@media (min-width:760px){
+  body{padding-bottom:0}
+  .sticky{display:none}
+  .hero .wrap{grid-template-columns:1.15fr 1fr;align-items:center}
+  .grid.three{grid-template-columns:repeat(3,1fr)}
+  .grid.two{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(3,1fr)}
+  .steps li{padding:72px 20px 20px}
+  .steps li::before{left:20px;top:20px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+<!-- ③ Google Tag Manager（body用）: 本番では <body> 直後にGTMの noscript を貼る
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+-->
+
+<div class="sample-bar">これはLP制作の<strong>見本</strong>です。サービス名・数字・お客様の声はすべて架空の内容です。</div>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="logo">業務<span>ラクラク</span>診断</div>
+    <a class="header-cta" href="#contact" data-cta="header">無料で診断</a>
+  </div>
+</header>
+
+<main>
+<!-- FV：誰の・どんな悩みに・何を・次に何をするか を最初の画面で伝える -->
+<section class="hero" data-section="hero" style="padding-bottom:56px">
+  <div class="wrap">
+    <div>
+      <h1>毎月の<em>「手作業」</em>、<br>どこまで減らせるか。<br>30分で見える化します。</h1>
+      <p>請求書の転記、月次の集計、問い合わせの仕分け。こうした繰り返しの作業を、AIと自動化でどこまで減らせるかを、無料のオンライン診断でお伝えします。</p>
+      <ul class="pills"><li>完全無料</li><li>所要30分</li><li>オンライン</li><li>無理な営業なし</li></ul>
+      <a class="btn" href="#contact" data-cta="hero">無料で診断を申し込む<span class="btn-note">最短で翌営業日に日程をご連絡</span></a>
+    </div>
+    <div class="compare" aria-label="診断のイメージ">
+      <h3>診断のイメージ（想定例）</h3>
+      <div class="row">
+        <div class="box before">いま<span class="big">月20時間</span>手作業</div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="box after">診断後<span class="big">月5時間</span>を目標に</div>
+      </div>
+      <small>※見本用の想定例です。実際の削減時間を保証するものではありません。</small>
+    </div>
+  </div>
+</section>
+
+<!-- 悩みへの共感：ターゲットが「自分ごと」と感じる材料 -->
+<section data-section="problems">
+  <div class="wrap">
+    <h2>こんなお悩みはありませんか？</h2>
+    <p class="lead">担当者の頭の中にしかない作業が、忙しさの原因になっていることがあります。</p>
+    <div class="grid three">
+      <div class="card"><span class="no">01</span><h3>毎月同じ作業に追われる</h3><p>集計や転記に時間がかかり、本来やりたい仕事が後回しになっている。</p></div>
+      <div class="card"><span class="no">02</span><h3>やり方が人によって違う</h3><p>担当者が変わるたびに手順が変わり、ミスや確認の手間が増えている。</p></div>
+      <div class="card"><span class="no">03</span><h3>何から手をつけるか分からない</h3><p>AIや自動化に興味はあるが、どこに使えばよいか判断できない。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" data-section="solution">
+  <div class="wrap">
+    <h2>診断で、この3つが分かります</h2>
+    <p class="lead">むずかしい言葉は使いません。まず「今の作業」を一緒に書き出します。</p>
+    <div class="grid three">
+      <div class="card"><span class="no">POINT 1</span><h3>時間がかかる作業の順位</h3><p>どの作業に、月に何時間かかっているかを一覧にします。</p></div>
+      <div class="card"><span class="no">POINT 2</span><h3>減らせる作業と方法</h3><p>AI・自動化で減らしやすい作業を、費用の目安つきで整理します。</p></div>
+      <div class="card"><span class="no">POINT 3</span><h3>最初の一歩の進め方</h3><p>すぐ試せる小さな改善から、順番をつけてご提案します。</p></div>
+    </div>
+  </div>
+</section>
+
+<section data-section="flow">
+  <div class="wrap">
+    <h2>お申し込みから診断までの流れ</h2>
+    <p class="lead">フォームの入力は1分ほどです。</p>
+    <ol class="steps">
+      <li><b>フォームから申し込む</b><span>お名前とメールアドレスだけでOKです。</span></li>
+      <li><b>日程をご連絡</b><span>翌営業日までに、候補日をメールでお送りします。</span></li>
+      <li><b>30分のオンライン診断</b><span>作業の内容をお聞きして、その場で改善案をお伝えします。</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="alt" data-section="voices">
+  <div class="wrap">
+    <h2>ご利用のイメージ <span class="tag">見本（架空）</span></h2>
+    <div class="grid two" style="margin-top:24px">
+      <div class="card voice">「毎月の集計が、思っていたより時間を取っていたと気づけました。」<b>製造業・総務ご担当（架空の見本）</b></div>
+      <div class="card voice">「難しい話がなく、できることから始められそうで安心しました。」<b>サービス業・経理ご担当（架空の見本）</b></div>
+    </div>
+  </div>
+</section>
+
+<section data-section="plan">
+  <div class="wrap plan-box">
+    <h2>無料診断の内容</h2>
+    <ul class="check" style="margin-top:24px">
+      <li>オンライン（Zoomなど）で30分</li>
+      <li>作業の書き出しシートをお渡し</li>
+      <li>改善案を1枚のメモにしてお送り</li>
+      <li>診断だけのご利用もOK（契約の必要なし）</li>
+    </ul>
+    <p class="center"><a class="btn" href="#contact" data-cta="plan">無料で診断を申し込む</a></p>
+  </div>
+</section>
+
+<section class="alt" data-section="faq">
+  <div class="wrap" style="max-width:720px">
+    <h2>よくあるご質問</h2>
+    <div style="margin-top:24px">
+      <details><summary>本当に無料ですか？</summary><p>診断は無料です。診断後に、しつこい営業をすることはありません。</p></details>
+      <details><summary>パソコンが苦手でも大丈夫ですか？</summary><p>大丈夫です。専門用語は使わず、画面を見ながらご説明します。</p></details>
+      <details><summary>どんな会社が対象ですか？</summary><p>従業員が10〜50人ほどの会社を想定しています。業種は問いません。</p></details>
+      <details><summary>診断のあと、必ず契約が必要ですか？</summary><p>必要ありません。改善案のメモだけお持ち帰りいただけます。</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 最終CTA：入力項目は最小限（フォーム離脱を減らす） -->
+<section id="contact" data-section="contact">
+  <div class="wrap">
+    <h2>無料診断のお申し込み</h2>
+    <p class="lead">1分で入力できます。</p>
+    <form class="form-card" id="lead-form" novalidate>
+      <label>お名前 <small>（必須）</small>
+        <input type="text" name="name" autocomplete="name" required>
+      </label>
+      <label>メールアドレス <small>（必須）</small>
+        <input type="email" name="email" autocomplete="email" inputmode="email" required>
+      </label>
+      <label>会社名 <small>（任意）</small>
+        <input type="text" name="company" autocomplete="organization">
+      </label>
+      <label>気になっていること <small>（任意）</small>
+        <select name="topic">
+          <option value="">選んでください</option>
+          <option>経理・請求書まわり</option>
+          <option>集計・レポート作成</option>
+          <option>問い合わせ対応</option>
+          <option>まだ分からない</option>
+        </select>
+      </label>
+      <button class="btn" type="submit" data-cta="form_submit">無料で診断を申し込む</button>
+      <p class="privacy">見本のため、入力内容は送信されません。</p>
+    </form>
+    <div class="thanks" id="thanks" hidden>
+      <h3>お申し込みありがとうございます（見本）</h3>
+      <p>本番では、ここに完了メッセージを表示し、計測タグ「generate_lead」を送ります。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 制作者メモ：この見本を見た広告運用チーム向けの説明 -->
+<section class="notes" id="notes" data-section="notes">
+  <div class="wrap">
+    <h2>制作メモ（見本の見どころ）</h2>
+    <p class="lead">広告運用で使うことを前提に、次の点を意識して作りました。</p>
+    <ul>
+      <li><b>表示が速い：</b>HTML1ファイルだけで完結。画像・外部フォント・外部スクリプトなし。通信は最初の1回のみ。</li>
+      <li><b>計測タグをすぐ設置できる：</b>head と body 直後にGTMを貼る場所を用意（ソース内にコメントで明記）。Google広告・Meta広告のタグはGTM側で追加できます。</li>
+      <li><b>計測イベントを最初から用意：</b><code>cta_click</code>（ボタン位置別）、<code>section_view</code>（どこまで読まれたか）、<code>generate_lead</code>（申し込み）。</li>
+      <li><b>スマホ優先：</b>スマホでは画面下に申し込みボタンを固定。フォームは最小の4項目。</li>
+      <li><b>流用しやすい：</b>色は先頭の <code>:root</code> の変数で一括変更。同じ構成で、別のLPを短い日数で作れます。</li>
+    </ul>
+    <p style="margin-bottom:8px"><b>動作確認：</b>上のボタンを押す・下にスクロールすると、送られたイベントがここに出ます。</p>
+    <pre class="log" id="dl-log" aria-live="polite">（まだイベントはありません）</pre>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">© 見本サイト（制作：松尾康広）／実在のサービスではありません</div></footer>
+
+<div class="sticky"><a class="btn" href="#contact" data-cta="sticky">無料で診断を申し込む</a></div>
+
+<script>
+(function(){
+  var dl = window.dataLayer = window.dataLayer || [];
+  var logEl = document.getElementById('dl-log');
+  var logCount = 0;
+  function push(obj){
+    dl.push(obj);
+    if(logEl){
+      if(logCount === 0){ logEl.textContent = ''; }
+      logCount++;
+      logEl.textContent += JSON.stringify(obj) + '\n';
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+  }
+  // ボタンのクリック（どの位置のボタンが押されたか）
+  document.addEventListener('click', function(e){
+    var el = e.target.closest ? e.target.closest('[data-cta]') : null;
+    if(el && el.getAttribute('data-cta') !== 'form_submit'){
+      push({event:'cta_click', cta_position: el.getAttribute('data-cta')});
+    }
+  });
+  // どのセクションまで読まれたか（各セクション1回だけ）
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          push({event:'section_view', section_id: en.target.getAttribute('data-section')});
+          io.unobserve(en.target);
+        }
+      });
+    }, {threshold:0.35});
+    document.querySelectorAll('[data-section]').forEach(function(s){ io.observe(s); });
+  }
+  // 申し込み（見本のため送信せず、計測イベントだけ送る）
+  var form = document.getElementById('lead-form');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!form.checkValidity()){ form.reportValidity(); return; }
+    push({event:'generate_lead', form_id:'lead-form'});
+    form.hidden = true;
+    document.getElementById('thanks').hidden = false;
+  });
+})();
+</script>
+</body>
+</html>
