@@ -1,0 +1,4 @@
+output/
+clips/*
+!clips/.gitkeep
+__pycache__/

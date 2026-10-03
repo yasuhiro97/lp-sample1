@@ -1,0 +1,13 @@
+video_id,scene,duration,layout,clip,text,pos,bg,size
+b01,1,2,full,,あなたが\n沼る配信ジャンルは\nこれ,center,#F9D9E7,88
+b01,2,3,frame,clips/zatsudan.mp4,まったり派 → 雑談配信,top,#E8DDF7,64
+b01,3,3,frame,clips/uta.mp4,音楽好き → 歌配信,top,#F9D9E7,64
+b01,4,3,frame,clips/game.mp4,ゲーム派 → ゲーム実況,top,#E8DDF7,64
+b01,5,2,full,,あなたはどれ？,center,#F9D9E7,88
+b01,6,2,full,,コメントで教えて\nアプリはプロフィールのリンクから,center,#E8DDF7,72
+b02,1,2,full,,寝る前に見る配信で\n性格わかるらしい,center,#E8DDF7,80
+b02,2,3,frame,clips/zatsudan.mp4,雑談配信 → 聞き上手さん,top,#F9D9E7,64
+b02,3,3,frame,clips/uta.mp4,歌配信 → 感受性ゆたかさん,top,#E8DDF7,64
+b02,4,3,frame,clips/game.mp4,ゲーム実況 → 負けず嫌いさん,top,#F9D9E7,64
+b02,5,2,full,,当たってた？,center,#E8DDF7,88
+b02,6,2,full,,コメントで教えて\nアプリはプロフィールのリンクから,center,#F9D9E7,72
