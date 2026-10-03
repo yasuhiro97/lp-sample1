@@ -37,6 +37,22 @@ python3 make_video.py scripts/reel_b_genre_nofootage.csv
 
 実際のアプリの画面とは違う「イメージ」なので、実在のアプリ画面や実際の数値（視聴者数、ランキングなど）のように見せる表現は入れないでください。
 
+## Gemini（Veo）でイメージ映像を作る
+
+`gen_broll.py` は、Gemini API の動画生成（Veo）で、夜の部屋やスマホを持つ手元などの**イメージ映像**を作り、`clips/` に保存します。作った映像は、台本CSVの `clip` 列で指定するとそのまま使えます。
+
+```bash
+export GEMINI_API_KEY=...        # Google AI Studio（https://aistudio.google.com）で発行
+python3 gen_broll.py scripts/broll_prompts.csv
+python3 make_video.py scripts/reel_a_veo.csv
+```
+
+- 作る映像の内容は `scripts/broll_prompts.csv` に英語で書きます（英語の方が意図どおりになりやすい）
+- **Veo の動画生成は有料**です。料金は Google AI Studio で確認してください
+- 使うモデルは環境変数 `GEMINI_VIDEO_MODEL` で変えられます（モデル名は変わることがあります）
+- 顔の映った人物は作らない設定にしています。AIで作った人物に体験談を話させると、実在しない体験談になり、ステマ規制や景品表示法の問題になります
+- Instagramでは、本物に見えるAI生成の映像に「AI情報」ラベルを付けることが求められます
+
 ## 録画の代わりに使える素材
 
 | 素材 | 使い方 | 注意 |
@@ -44,6 +60,7 @@ python3 make_video.py scripts/reel_b_genre_nofootage.csv
 | **ASP・広告主の公式素材**（動画バナー、スクリーンショット） | ダウンロードして `clips/` に入れる | 一番おすすめ。使ってよい媒体・加工の可否を案件ページで確認する |
 | **無料のストック動画**（Pexels、Pixabayなど） | 「夜の部屋」「スマホを持つ手」などを縦長で探して `clips/` に入れる | 商用利用OKのものを選ぶ。映っている人物を利用者の体験談のように見せない |
 | **mockレイアウト** | 上の方法。素材は不要 | 「イメージ」であることを表示する（自動で入る） |
+| **Gemini（Veo）のAI映像** | `gen_broll.py` で作る | 有料。人物の顔や体験談には使わない。InstagramのAIラベルを付ける |
 
 ## 動画を作る
 
