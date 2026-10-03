@@ -66,7 +66,10 @@
 
 `scripts/weekly.csv` を、今週の台本で**上書き**する（列は `README.md` の「台本CSVの書き方」を参照）。
 
-- 本数は `weekly_output.reels`。宣伝は `promo_ratio` に従う
+- 本数は `weekly_output.reels`（5本）。宣伝は `promo_ratio` に従い、内訳は `mix` を目安にする
+- 投稿は `post_days` の1日1本。`weekly_notes.md` に曜日ごとの投稿日時（21〜23時）を書く
+- 同じネタを2本以上に使う場合は、フック・構成・映像のどれかを必ず変えた別動画にする（同一動画の重複投稿はしない）
+- 宣伝の動画は、週の前半・後半に偏らないよう、水曜か木曜に置く
 - `video_id` は `w01`, `w02`, ... とする
 - 1本15秒前後。1シーン目はフック（最初の1秒で誰向けか分かる言葉）
 - 映像は `scripts/broll_prompts.csv` にある `clips/<name>.mp4` か、`mock` レイアウトだけを使う。**`broll_prompts.csv` は変更しない**（変えるとVeoの作り直しで料金がかかる）
