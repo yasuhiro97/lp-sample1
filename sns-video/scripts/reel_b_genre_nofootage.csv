@@ -1,0 +1,7 @@
+video_id,scene,duration,layout,clip,mock,accent,text,pos,bg,size
+n01,1,2,full,,,,あなたが\n沼る配信ジャンルは\nこれ,center,#F9D9E7,88
+n01,2,3,mock,,雑談配信|こんばんは〜|今日なに食べた？|その話わかる,#B89BE0,まったり派 → 雑談配信,top,#E8DDF7,64
+n01,3,3,mock,,♪ 歌配信|この曲すき！|声きれい|アンコール,#F2A7C3,音楽好き → 歌配信,top,#F9D9E7,64
+n01,4,3,mock,,ゲーム実況|うますぎ|今のすごい！|がんばれ〜,#8FC1E8,ゲーム派 → ゲーム実況,top,#E8DDF7,64
+n01,5,2,full,,,,あなたはどれ？,center,#F9D9E7,88
+n01,6,2,full,,,,コメントで教えて\nアプリはプロフィールのリンクから,center,#E8DDF7,72

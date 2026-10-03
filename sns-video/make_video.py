@@ -34,8 +34,13 @@ SAFE_BOTTOM = int(H * 0.75)
 # frameレイアウト: スマホ画面の録画を中央に小さく置く
 FRAME_W, FRAME_H = 560, 996
 FRAME_X = (W - FRAME_W) // 2
-FRAME_Y = 560
+FRAME_Y = 600
 FRAME_BORDER = 10
+
+# mockレイアウト: 録画を使わずに「配信画面のイメージ」を描く
+MOCK_SCREEN = "0x2B2238"        # 画面の背景
+MOCK_STAGE = "#B89BE0"          # 配信エリアの色（CSVの accent 列で変更可）
+MOCK_NOTE = "※画面はイメージです"
 
 
 def hex_color(value, default):
@@ -48,10 +53,52 @@ def text_width(line, size):
     return sum(size * (0.6 if ord(ch) < 0x2E80 else 1.0) for ch in line)
 
 
-def fit_size(line, size):
-    """1行が MAX_TEXT_W に収まるよう文字サイズを小さくする。"""
+def fit_size(line, size, max_w=MAX_TEXT_W):
+    """1行が max_w に収まるよう文字サイズを小さくする。"""
     width = text_width(line, 1)
-    return int(min(size, MAX_TEXT_W / width)) if width else size
+    return int(min(size, max_w / width)) if width else size
+
+
+def write_text(workdir, name, text):
+    path = os.path.join(workdir, name)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(text)
+    return path
+
+
+def mock_draws(scene, workdir, index):
+    """録画の代わりに、配信画面のイメージ（タイトル・LIVE・流れるコメント）を描く。
+
+    CSVの mock 列: 「タイトル|コメント1|コメント2|...」
+    """
+    parts = [p.strip() for p in (scene.get("mock") or "").split("|") if p.strip()]
+    title, comments = (parts[0], parts[1:]) if parts else ("", [])
+    stage = hex_color(scene.get("accent"), MOCK_STAGE)
+    x0, y0 = FRAME_X, FRAME_Y
+    pad = 30
+    draws = [
+        # 配信エリア
+        f"drawbox=x={x0 + pad}:y={y0 + 110}:w={FRAME_W - pad * 2}:h=420:color={stage}@0.9:t=fill",
+        # LIVE表示
+        drawtext(write_text(workdir, f"s{index}_live.txt", "LIVE"), 30,
+                 x0 + pad, y0 + 44, "white", "0xE5487A"),
+    ]
+    if title:
+        tf = write_text(workdir, f"s{index}_title.txt", title)
+        draws.append(drawtext(tf, fit_size(title, 64, FRAME_W - 120), "(w-text_w)/2",
+                              f"{y0 + 290}+8*sin(2*PI*t)", "white", None))
+    # コメントが0.6秒ごとに1つずつ表示される
+    for i, comment in enumerate(comments[:4]):
+        tf = write_text(workdir, f"s{index}_c{i}.txt", comment)
+        start = 0.3 + 0.6 * i
+        draws.append(drawtext(
+            tf, fit_size(comment, 32, FRAME_W - 120), x0 + pad + 10, y0 + 590 + i * 84,
+            "white", "white@0.18", f"if(lt(t,{start}),0,min(1,(t-{start})/0.25))",
+        ))
+    note = write_text(workdir, f"s{index}_mocknote.txt", MOCK_NOTE)
+    draws.append(drawtext(note, 24, f"{x0 + FRAME_W - pad}-text_w", y0 + FRAME_H - 50,
+                          "white@0.7", None))
+    return draws
 
 
 def ff_escape(path):
@@ -81,7 +128,7 @@ def build_scene(scene, workdir, index):
     layout = (scene.get("layout") or "full").strip()
     clip = (scene.get("clip") or "").strip()
     clip_path = os.path.join(BASE, clip) if clip else ""
-    has_clip = bool(clip_path) and os.path.exists(clip_path)
+    has_clip = layout != "mock" and bool(clip_path) and os.path.exists(clip_path)
     bg = hex_color(scene.get("bg"), "#F9D9E7")
     lines = [l for l in scene["text"].replace("\\n", "\n").split("\n") if l.strip()]
     size = int(scene.get("size") or 72)
@@ -92,7 +139,15 @@ def build_scene(scene, workdir, index):
         inputs += ["-stream_loop", "-1", "-t", str(dur), "-i", clip_path]
 
     chain = []
-    if layout == "frame":
+    if layout == "mock":
+        chain.append(
+            f"[0:v]drawbox=x={FRAME_X - FRAME_BORDER}:y={FRAME_Y - FRAME_BORDER}"
+            f":w={FRAME_W + FRAME_BORDER * 2}:h={FRAME_H + FRAME_BORDER * 2}"
+            f":color={FRAME_COLOR}:t=fill,"
+            f"drawbox=x={FRAME_X}:y={FRAME_Y}:w={FRAME_W}:h={FRAME_H}"
+            f":color={MOCK_SCREEN}:t=fill[base]"
+        )
+    elif layout == "frame":
         chain.append(
             f"[0:v]drawbox=x={FRAME_X - FRAME_BORDER}:y={FRAME_Y - FRAME_BORDER}"
             f":w={FRAME_W + FRAME_BORDER * 2}:h={FRAME_H + FRAME_BORDER * 2}"
@@ -117,7 +172,7 @@ def build_scene(scene, workdir, index):
     else:
         chain.append("[0:v]null[base]")
 
-    draws = []
+    draws = mock_draws(scene, workdir, index) if layout == "mock" else []
 
     # 素材が未配置のときは、どこに何を入れるかを表示する
     if clip and not has_clip:
