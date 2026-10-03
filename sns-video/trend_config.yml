@@ -19,10 +19,19 @@ period_days: 14
 min_reported_views: 100000   # 「◯万回再生」などの記載がある場合の下限
 
 # 優先して探すテーマ（空でもOK）
-focus_keywords: ["推し活", "寝る前", "ひとり時間", "大学生あるある", "診断"]
+focus_keywords: ["推し活", "寝る前", "ひとり時間", "大学生あるある", "診断",
+                  "居場所", "コメント交流", "平成女児", "界隈", "夜ふかし"]
+
+# 話題の情報源（上から順に試し、アクセスできないものは飛ばす）
+sources:
+  web_search: true              # 「Xで話題」「トレンド入り」の記事を検索（常に使える）
+  google_trends_rss: true       # 環境の Allowed domains に trends.google.co.jp が必要
+  yahoo_realtime: false         # 利用規約の確認が済むまで使わない
+  x_official_api: false         # 有料プランが必要。成果が出てから検討
 
 # 使わないテーマ・言葉
-exclude_keywords: ["出会い", "稼げる", "副業", "恋愛マッチング", "JK", "制服"]
+exclude_keywords: ["出会い", "稼げる", "副業", "恋愛マッチング", "JK", "制服",
+                   "事件", "事故", "災害", "訃報", "炎上", "政治"]
 
 # 1週間に作る台本の数
 weekly_output:
