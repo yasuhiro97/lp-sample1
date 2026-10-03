@@ -60,8 +60,11 @@ python3 make_video.py scripts/reel_a_veo.csv
 **準備（最初に1回）**
 
 1. リポジトリの Settings → Secrets and variables → Actions → **Secrets** に `GEMINI_API_KEY` を登録
-2. 毎週自動で動かす場合は、同じ画面の **Variables** に `SNS_VIDEO_SCHEDULE` = `on` を登録（毎週月曜 8:47 日本時間に実行）
-3. モデルを変える場合は、Variables に `GEMINI_VIDEO_MODEL` を登録（任意）
+2. モデルを変える場合は、同じ画面の **Variables** に `GEMINI_VIDEO_MODEL` を登録（任意）
+
+**自動で実行される**
+
+`scripts/weekly.csv` が main に入ったとき（＝毎週の台本のプルリクエストをマージしたとき）に動画を作ります。
 
 **手動で実行する**
 
@@ -73,6 +76,29 @@ Actions タブ → **SNS video** → **Run workflow**。動画にする台本CSV
 
 - Veo の映像は、`scripts/broll_prompts.csv` を変えない限り再利用され、**追加の料金はかかりません**。指示文を変えると作り直します
 - `GEMINI_API_KEY` が未設定の場合は、Veo の部分をスキップし、仮の枠で動画を作ります（警告が表示されます）
+
+## 毎週の流行り調査と台本作り
+
+毎週のルーティン（Claude Code）が、`TREND_RESEARCH.md` の手順で流行りを調べ、`scripts/weekly.csv`（台本）と `weekly_notes.md`（キャプション・投稿日時・出典）を作って**プルリクエスト**を出します。
+
+```
+ルーティン：流行りを調べて台本のプルリクエストを作る
+   ↓
+あなた：内容を確認してマージ（＝承認）
+   ↓
+GitHub Actions：動画を作る → Artifacts からダウンロード
+```
+
+**調査の条件**は `trend_config.yml` で変えられます。
+
+| 指定できること | 調べ方 |
+|---|---|
+| 年代・性別・ライフスタイル・地域 | 公開されているトレンド記事や特集を、その層に絞って探す |
+| 期間、優先テーマ、除外テーマ | そのまま条件として使う |
+| 再生数 | 記事などに**公表された数値がある場合だけ**使う（Instagram・TikTokの数値を直接取ることは規約上できない） |
+| フォロワー増加率など自分の実績 | `insights/` に自分の投稿の数値をCSVで置くと、伸びた型を優先する |
+
+**自分の実績の入れ方**：Instagramのインサイト（またはMeta Business Suite）で各リールの数値を確認し、`insights/insights_template.csv` と同じ列のCSVを `insights/` に追加します。完走率・保存・シェア・フォロー数が高い型が、翌週の台本で優先されます。
 
 ## 録画の代わりに使える素材
 
