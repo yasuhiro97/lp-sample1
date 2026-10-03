@@ -176,6 +176,7 @@ def build_scene(scene, workdir, index):
 
     # 素材が未配置のときは、どこに何を入れるかを表示する
     if clip and not has_clip:
+        print(f"  注意: {clip} がないため、仮の枠で作りました")
         note = os.path.join(workdir, f"s{index}_note.txt")
         with open(note, "w", encoding="utf-8") as f:
             f.write(f"ここに {clip} を入れる")

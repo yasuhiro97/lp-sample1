@@ -51,7 +51,28 @@ python3 make_video.py scripts/reel_a_veo.csv
 - **Veo の動画生成は有料**です。料金は Google AI Studio で確認してください
 - 使うモデルは環境変数 `GEMINI_VIDEO_MODEL` で変えられます（モデル名は変わることがあります）
 - 顔の映った人物は作らない設定にしています。AIで作った人物に体験談を話させると、実在しない体験談になり、ステマ規制や景品表示法の問題になります
-- Instagramでは、本物に見えるAI生成の映像に「AI情報」ラベルを付けることが求められます
+- Instagramでは、本物に見えるAI生成の映像に「AI情報」ラベルを付けることが求められます。アプリから投稿する場合は投稿画面の「AIラベル」をオンにします。公式APIで自動投稿する場合は、投稿の作成時に `is_ai_generated=true` を指定するとラベルが付きます
+
+## GitHub Actionsで自動実行する
+
+`.github/workflows/sns-video.yml` で、Veo の映像作成から動画の完成までを GitHub 上で実行できます。パソコンに ffmpeg を入れる必要はありません。
+
+**準備（最初に1回）**
+
+1. リポジトリの Settings → Secrets and variables → Actions → **Secrets** に `GEMINI_API_KEY` を登録
+2. 毎週自動で動かす場合は、同じ画面の **Variables** に `SNS_VIDEO_SCHEDULE` = `on` を登録（毎週月曜 8:47 日本時間に実行）
+3. モデルを変える場合は、Variables に `GEMINI_VIDEO_MODEL` を登録（任意）
+
+**手動で実行する**
+
+Actions タブ → **SNS video** → **Run workflow**。動画にする台本CSVを指定できます（複数はスペース区切り）。
+
+**できた動画の受け取り**
+
+実行結果のページの下にある **Artifacts**（`sns-videos-番号`）からダウンロードできます。保存期間は14日間です。
+
+- Veo の映像は、`scripts/broll_prompts.csv` を変えない限り再利用され、**追加の料金はかかりません**。指示文を変えると作り直します
+- `GEMINI_API_KEY` が未設定の場合は、Veo の部分をスキップし、仮の枠で動画を作ります（警告が表示されます）
 
 ## 録画の代わりに使える素材
 
