@@ -1,0 +1,82 @@
+name: SNS video
+
+# リール動画を作る。
+# - 自動: 毎週の台本（scripts/weekly.csv）のプルリクエストを main にマージしたとき（＝承認）
+# - 手動: Actions タブ → SNS video → Run workflow
+# Veo のイメージ映像を作るには、リポジトリのシークレット GEMINI_API_KEY が必要（有料）。
+on:
+  push:
+    branches: [main]
+    paths:
+      - sns-video/scripts/weekly.csv
+      - sns-video/scripts/broll_prompts.csv
+  workflow_dispatch:
+    inputs:
+      scripts:
+        description: 動画にする台本CSV（sns-video/ からのパス。複数はスペース区切り）
+        default: scripts/weekly.csv
+      generate_broll:
+        description: Veo でイメージ映像を作る（作成済みの映像は再利用）
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: sns-video
+    env:
+      SCRIPTS: ${{ inputs.scripts || 'scripts/weekly.csv' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
+      # Veo の映像は有料なので、指示文（broll_prompts.csv）が変わらない限り使い回す
+      - name: Restore generated clips
+        uses: actions/cache/restore@v4
+        with:
+          path: sns-video/clips
+          key: broll-${{ hashFiles('sns-video/scripts/broll_prompts.csv') }}-${{ github.run_id }}
+          restore-keys: broll-${{ hashFiles('sns-video/scripts/broll_prompts.csv') }}-
+
+      - name: Generate b-roll with Veo
+        id: broll
+        if: github.event_name == 'push' || inputs.generate_broll
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_VIDEO_MODEL: ${{ vars.GEMINI_VIDEO_MODEL }}
+        run: |
+          if [ -z "$GEMINI_API_KEY" ]; then
+            echo "::warning::GEMINI_API_KEY が未設定のため、Veo の映像作成をスキップしました"
+            exit 0
+          fi
+          [ -n "$GEMINI_VIDEO_MODEL" ] || unset GEMINI_VIDEO_MODEL
+          python3 gen_broll.py scripts/broll_prompts.csv
+          echo "generated=true" >> "$GITHUB_OUTPUT"
+
+      - name: Save generated clips
+        if: steps.broll.outputs.generated == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: sns-video/clips
+          key: broll-${{ hashFiles('sns-video/scripts/broll_prompts.csv') }}-${{ github.run_id }}
+
+      - name: Render videos
+        run: |
+          for f in $SCRIPTS; do
+            python3 make_video.py "$f"
+          done
+
+      - name: Upload videos
+        uses: actions/upload-artifact@v4
+        with:
+          name: sns-videos-${{ github.run_number }}
+          path: sns-video/output/
+          retention-days: 14

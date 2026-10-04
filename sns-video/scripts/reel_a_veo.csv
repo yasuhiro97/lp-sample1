@@ -1,0 +1,6 @@
+video_id,scene,duration,layout,clip,mock,accent,text,pos,bg,size
+a01,1,3,full,clips/night_bed.mp4,,,寝る前のスマホ時間\n最近ちょっと変わった,center,#2B2238,76
+a01,2,3,full,clips/cozy_room.mp4,,,前は動画を流し見して\n気づいたら2時…,center,#2B2238,68
+a01,3,4,mock,,雑談配信|こんばんは〜|今日なに食べた？|わかる〜,#B89BE0,最近は配信を見ながら\nまったり寝落ち,top,#E8DDF7,60
+a01,4,3,full,clips/phone_desk.mp4,,,コメントで話せるのが\n楽しい,center,#2B2238,72
+a01,5,2,full,,,,アプリは\nプロフィールのリンクから,center,#F9D9E7,72

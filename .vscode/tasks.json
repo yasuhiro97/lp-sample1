@@ -1,0 +1,56 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "1. 準備の確認（最初に1回）",
+      "type": "shell",
+      "command": "bash sns-video/setup.sh",
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "2. 今週の動画を全部作る",
+      "type": "shell",
+      "command": "cd sns-video && python3 make_video.py scripts/weekly.csv && echo '→ sns-video/output/ に保存しました'",
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "3. 動画を1本だけ作る（IDを入力）",
+      "type": "shell",
+      "command": "cd sns-video && python3 make_video.py scripts/weekly.csv ${input:videoId}",
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "4. 録画なしのサンプルを作る",
+      "type": "shell",
+      "command": "cd sns-video && python3 make_video.py scripts/reel_b_genre_nofootage.csv",
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "5. 紹介ページを表示する（http://localhost:8000）",
+      "type": "shell",
+      "command": "cd landing && python3 -m http.server 8000",
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "6. Veoで映像を作る（有料・GEMINI_API_KEYが必要）",
+      "type": "shell",
+      "command": "cd sns-video && python3 gen_broll.py scripts/broll_prompts.csv",
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "videoId",
+      "type": "promptString",
+      "description": "作る動画のID（例: w01）",
+      "default": "w01"
+    }
+  ]
+}
