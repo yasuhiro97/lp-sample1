@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>寝る前の30分、配信でゆるくつながる｜配信アプリの紹介【PR】</title>
+<meta name="description" content="コメントで話せるライブ配信アプリの紹介ページです。18歳以上の方向け。広告（PR）を含みます。">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f3e8ff">
+
+<style>
+:root{
+  --ink:#2f2540; --muted:#6b5f7d; --bg:#fdf7fb; --card:#ffffff; --line:#eadcf0;
+  --pink:#ffd9ea; --lav:#e9defa; --accent:#6d28d9; --accent-dark:#5b21b6; --warn:#fff4e5; --warn-ink:#7a3e00;
+  --radius:18px;
+}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);background:var(--bg);line-height:1.85;font-size:16px;
+  font-family:"Hiragino Maru Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;padding-bottom:84px}
+a{color:var(--accent-dark)}
+.wrap{width:min(640px,100% - 32px);margin-inline:auto}
+h1,h2,h3{line-height:1.45;margin:0}
+h2{font-size:clamp(20px,5.2vw,26px);text-align:center;margin-bottom:16px}
+section{padding:40px 0}
+p{margin:0 0 12px}
+
+.pr-bar{background:#2f2540;color:#fff;font-size:13px;text-align:center;padding:8px 16px}
+.pr-bar b{background:#fff;color:#2f2540;border-radius:4px;padding:1px 8px;margin-right:8px}
+#setup-warning{display:none;background:var(--warn);color:var(--warn-ink);font-size:13px;text-align:center;padding:10px 16px;border-bottom:1px solid #f0d9b5}
+
+.hero{background:linear-gradient(160deg,var(--pink),var(--lav));padding:44px 0 48px;text-align:center}
+.hero h1{font-size:clamp(26px,7.4vw,38px)}
+.hero p{margin:16px auto 24px;max-width:30em}
+.pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 24px;padding:0;list-style:none}
+.pills li{background:rgba(255,255,255,.75);border-radius:999px;padding:4px 14px;font-size:14px}
+
+.btn{display:block;width:100%;max-width:420px;margin:0 auto;background:var(--accent);color:#fff;font-weight:700;font-size:18px;text-decoration:none;text-align:center;
+  padding:16px 24px;border-radius:999px;box-shadow:0 4px 0 var(--accent-dark)}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--accent-dark)}
+.btn:focus-visible,summary:focus-visible{outline:3px solid #ffb703;outline-offset:3px}
+.btn-note{display:block;font-size:13px;font-weight:400;opacity:.95}
+.cta-caption{text-align:center;font-size:13px;color:var(--muted);margin-top:12px}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:14px}
+.card h3{font-size:17px;margin-bottom:6px}
+.card p{color:var(--muted);margin:0;font-size:15px}
+.alt{background:#fff}
+
+.steps{counter-reset:s;list-style:none;margin:0;padding:0}
+.steps li{counter-increment:s;display:flex;gap:14px;align-items:flex-start;margin-bottom:14px}
+.steps li::before{content:counter(s);flex:none;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;display:grid;place-items:center}
+.steps b{display:block}
+.steps span{color:var(--muted);font-size:15px}
+
+.note{background:var(--warn);color:var(--warn-ink);border-radius:var(--radius);padding:16px 20px;font-size:14px}
+.note ul{margin:8px 0 0;padding-left:1.2em}
+
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700;padding:14px 18px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"＋";float:right;color:var(--accent)}
+details[open] summary::after{content:"－"}
+details p{padding:0 18px 14px;color:var(--muted);font-size:15px}
+
+footer{padding:32px 0;font-size:13px;color:var(--muted)}
+footer h3{font-size:14px;color:var(--ink);margin:16px 0 4px}
+
+.sticky{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);border-top:1px solid var(--line);padding:10px 16px;z-index:10}
+.sticky .btn{font-size:16px;padding:12px 20px}
+@media (prefers-reduced-motion:no-preference){.btn{transition:transform .15s,box-shadow .15s}}
+</style>
+</head>
+<body>
+
+<div class="pr-bar"><b>PR</b>このページには広告（アフィリエイトリンク）が含まれます</div>
+<div id="setup-warning">【設定が必要】リンク先のURLがまだ入っていません（index.html の AFFILIATE_URL を書き換えてください）</div>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>寝る前の30分、<br>配信でゆるくつながる夜</h1>
+    <p>電話ほど重くないけど、誰かとちょっと話したい。そんな夜に、コメントで話せるライブ配信を見るという選択肢があります。</p>
+    <ul class="pills">
+      <li>18歳以上の方向け</li>
+      <li>見るだけでもOK</li>
+      <li>コメントは気が向いたときに</li>
+    </ul>
+    <a class="btn js-cta" href="REPLACE_WITH_AFFILIATE_URL" rel="sponsored noopener" target="_blank">
+      【アプリ名】を見てみる
+      <span class="btn-note">登録はスマホで【所要時間：要確認】</span>
+    </a>
+    <p class="cta-caption">広告：リンク先は提携先（【アプリ名】）のページです</p>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <h2>こんな夜に</h2>
+      <div class="card"><h3>ショート動画を流し見して、気づいたら2時</h3><p>見たあとに「何も残ってない…」となりがち。誰かの声やコメントがあると、時間の使い方が少し変わるかもしれません。</p></div>
+      <div class="card"><h3>友達に連絡するほどじゃないけど、ひとりは少しさみしい</h3><p>配信は、見ているだけでも同じ時間を共有している感じがあります。</p></div>
+      <div class="card"><h3>好きな音楽やゲームの話を、気軽にしたい</h3><p>ジャンルごとに配信があるので、「話したい」「聞いていたい」を選べます。</p></div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <h2>配信の楽しみ方</h2>
+      <div class="card"><h3>まったり雑談</h3><p>今日あったことの話を聞きながら、コメントでゆるく反応。</p></div>
+      <div class="card"><h3>歌・音楽</h3><p>作業や寝る前のBGMに。好きな曲をコメントで伝えることもできます。</p></div>
+      <div class="card"><h3>ゲーム実況</h3><p>プレイを見て一緒に盛り上がる楽しみ方です。</p></div>
+      <p class="cta-caption">※ 配信の内容は日によって異なります。ジャンルや機能は【アプリ名】の公式ページでご確認ください。</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>はじめ方</h2>
+      <ol class="steps">
+        <li><div><b>下のボタンから公式ページへ</b><span>スマホで開くのがおすすめです。</span></div></li>
+        <li><div><b>アプリを入れて登録</b><span>登録に必要なもの：【要確認：メール／SNSアカウントなど】</span></div></li>
+        <li><div><b>気になる配信をのぞいてみる</b><span>最初は見るだけでOK。コメントは慣れてからで大丈夫です。</span></div></li>
+      </ol>
+      <a class="btn js-cta" href="REPLACE_WITH_AFFILIATE_URL" rel="sponsored noopener" target="_blank">登録ページを開く（広告）</a>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <h2>先に知っておいてほしいこと</h2>
+      <div class="note">
+        <b>ほどよく楽しむために</b>
+        <ul>
+          <li>利用できるのは<b>18歳以上</b>の方です。</li>
+          <li>見る時間は先に決めておくと、夜ふかしを防げます（おすすめは「寝る前の30分」）。</li>
+          <li>有料の機能（【要確認：投げ銭・アイテムなど】）がある場合は、<b>自分のペースで、無理のない範囲で</b>。</li>
+          <li>個人情報（本名・住所・学校名・連絡先など）は、配信やコメントでは教えないでください。</li>
+          <li>外で会おうと誘われたり、お金を求められたりしたら、応じずに運営へ通報してください。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>よくある質問</h2>
+      <details><summary>お金はかかりますか？</summary><p>【要確認：提携先の公式ページの内容を、そのまま正確に書いてください。例）「登録・視聴は無料。一部の機能は有料」】</p></details>
+      <details><summary>顔を出す必要はありますか？</summary><p>見る側として使うだけなら、顔を出す必要はありません。【要確認】</p></details>
+      <details><summary>コメントしないと見られませんか？</summary><p>コメントしなくても見られます。見るだけでも大丈夫です。【要確認】</p></details>
+      <details><summary>アプリはどこから入れますか？</summary><p>上のボタンから、提携先の公式ページに移動できます。</p></details>
+      <details><summary>やめたくなったら？</summary><p>退会の方法は、アプリ内の設定または公式ページでご確認ください。</p></details>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap" style="text-align:center">
+      <h2>気になったら、のぞいてみてね</h2>
+      <a class="btn js-cta" href="REPLACE_WITH_AFFILIATE_URL" rel="sponsored noopener" target="_blank">【アプリ名】を見てみる<span class="btn-note">広告</span></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <h3>広告表示</h3>
+    <p>当ページは、アフィリエイト広告（成果報酬型広告）を利用しています。リンク先でご登録やご利用があった場合、運営者に報酬が支払われることがあります。</p>
+    <h3>運営者情報</h3>
+    <p>運営者：【ニックネームなど】／連絡先：【メールアドレスまたは問い合わせ先】</p>
+    <h3>免責</h3>
+    <p>当ページは提携先とは別に運営されています。サービスの内容・料金・条件は変更されることがあるため、必ず公式ページで最新の情報をご確認ください。</p>
+    <h3>プライバシー</h3>
+    <p>当ページは、アクセス元（Instagram・Xなど）を把握するため、リンクのパラメータ（src）を使います。個人を特定する情報は取得していません。【計測ツールを入れた場合は、ここに内容を追記してください】</p>
+  </div>
+</footer>
+
+<div class="sticky"><a class="btn js-cta" href="REPLACE_WITH_AFFILIATE_URL" rel="sponsored noopener" target="_blank">【アプリ名】を見てみる（広告）</a></div>
+
+<script>
+/* ===== 設定（ここだけ書き換える）=====
+   AFFILIATE_URL : ASPで発行した、この案件の紹介リンク
+   SUBID_PARAM   : ASPが用意している「サブID」のパラメータ名（ASPの管理画面・案件ページで確認）。
+                   使わない場合は空文字 ""
+   アクセス元の目印は、リンクの末尾に ?src=ig_bio のように付けて使います
+   （例）プロフィール: ?src=ig_bio / ストーリー: ?src=ig_story / X: ?src=x
+*/
+var AFFILIATE_URL = "REPLACE_WITH_AFFILIATE_URL";
+var SUBID_PARAM = "";
+
+(function () {
+  var links = document.querySelectorAll(".js-cta");
+  var ready = AFFILIATE_URL.indexOf("REPLACE_") === -1;
+  var src = "";
+  try { src = (new URLSearchParams(location.search).get("src") || "").replace(/[^a-z0-9_-]/gi, "").slice(0, 32); } catch (e) {}
+
+  var url = AFFILIATE_URL;
+  if (ready && SUBID_PARAM && src) {
+    url += (url.indexOf("?") === -1 ? "?" : "&") + encodeURIComponent(SUBID_PARAM) + "=" + encodeURIComponent(src);
+  }
+  for (var i = 0; i < links.length; i++) {
+    if (ready) { links[i].href = url; }
+    else { links[i].addEventListener("click", function (e) { e.preventDefault(); }); }
+  }
+  if (!ready) { document.getElementById("setup-warning").style.display = "block"; }
+})();
+</script>
+</body>
+</html>
